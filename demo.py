@@ -6,6 +6,8 @@ from models.basic_model import CDEvaluator
 
 import os
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+
 """
 quick start
 
@@ -50,8 +52,8 @@ if __name__ == '__main__':
     args = get_args()
     utils.get_device(args)
     device = torch.device("cuda:%s" % args.gpu_ids[0]
-                          if torch.cuda.is_available() and len(args.gpu_ids)>0
-                        else "cpu")
+                          if torch.cuda.is_available() and len(args.gpu_ids) > 0
+                          else "cpu")
     args.checkpoint_dir = os.path.join(args.checkpoint_root, args.project_name)
     os.makedirs(args.output_folder, exist_ok=True)
 
@@ -71,9 +73,4 @@ if __name__ == '__main__':
         score_map = model._forward_pass(batch)
         model._save_predictions()
 
-
-
-
-
-
-
+print('end of file')
